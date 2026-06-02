@@ -1,0 +1,54 @@
+//1. Maximum Subarray
+//https://leetcode.com/problems/maximum-subarray/
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int sum=0,max_sum=INT_MIN;
+        for(int val:nums)
+        {
+            sum+=val;
+            max_sum=max(max_sum,sum);
+            if(sum<0)
+            {
+                sum=0;
+            }
+        }
+        return max_sum;
+    }
+};
+
+
+//2. Contains Duplicate
+//https://leetcode.com/problems/contains-duplicate/
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_set<int> seen;
+        for (int num : nums) {
+            if (seen.count(num)) {
+                return true;
+            }
+            seen.insert(num);
+        }
+        return false;
+    }
+};
+
+
+//3. Maximum Average Subarray I
+//https://leetcode.com/problems/maximum-average-subarray-i/
+class Solution {
+public:
+    double findMaxAverage(vector<int>& nums, int k) {
+        double csum = 0;
+        for (int i = 0; i < k; i++) {
+            csum += nums[i];
+        }
+        double max_sum = csum;
+        for (int i = k; i < nums.size(); i++) {
+            csum += nums[i] - nums[i - k];
+            max_sum = max(max_sum, csum);
+        }
+        return max_sum / k;
+    }
+};
